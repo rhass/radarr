@@ -1,0 +1,11 @@
+DEPENDENCIES
+  radarr
+    path: .
+    metadata: true
+
+GRAPH
+  poise (2.8.1)
+  poise-archive (1.5.0)
+    poise (~> 2.6)
+  radarr (1.0.0)
+    poise-archive (>= 0.0.0)

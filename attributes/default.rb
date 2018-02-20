@@ -1,3 +1,4 @@
+default['radarr']['version'] = 'latest'
 default['radarr']['user'] = 'radarr'
 default['radarr']['group'] = 'radarr'
 default['radarr']['home'] = '/home/radarr'

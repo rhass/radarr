@@ -17,7 +17,9 @@ end
 
 package %w(mono-devel mediainfo sqlite3 libmono-cil-dev)
 
-app = radarr :latest
+app = radarr node['radarr']['version'] do
+  notifies :restart, 'service[radarr]'
+end
 
 systemd_unit 'radarr.service' do
   content(Unit: {
@@ -57,12 +59,12 @@ file ::File.join(node['radarr']['home'], '.config/Radarr/config.xml') do
   user node['radarr']['user']
   group node['radarr']['user']
   mode 0600
-  content(lazy {
+  content(lazy do
     require 'nokogiri'
-    Nokogiri::XML::Builder.new {|xml| xml.Config { node[:radarr][:settings].each {|k,v| xml.send(k, v) } }}.doc.root.to_xml(
+    Nokogiri::XML::Builder.new { |xml| xml.Config { node[:radarr][:settings].each { |k, v| xml.send(k, v) } } }.doc.root.to_xml(
       save_with: Nokogiri::XML::Node::SaveOptions::NO_EMPTY_TAGS | Nokogiri::XML::Node::SaveOptions::FORMAT
     )
-  })
+  end)
   notifies :restart, 'service[radarr]'
 end
 

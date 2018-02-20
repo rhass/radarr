@@ -23,6 +23,12 @@ platforms:
         - ["forwarded_port", {guest: 7878, host: 27878}]
 
 suites:
-  - name: default
+  - name: latest
+    run_list:
+      - recipe[radarr::default]
+  - name: specified_version
+    attributes:
+      radarr:
+        version: 0.2.0.870
     run_list:
       - recipe[radarr::default]

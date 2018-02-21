@@ -10,5 +10,4 @@ source_url        'https://github.com/rhass/radarr'
 supports          %w(ubuntu debian)
 chef_version      '>= 13.0'
 
-gem 'nokogiri'
 depends 'poise-archive'

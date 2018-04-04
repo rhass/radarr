@@ -13,13 +13,13 @@ default_action :install
 
 action :install do
   # TODO: Move default recipe bits into resource.
-  directory install_path do
+  directory new_resource.install_path do
     user new_resource.user
     group new_resource.group
     recursive true
   end
 
-  poise_archive url_for_version(version.to_s) do
+  poise_archive url_for_version(new_resource.version.to_s) do
     destination new_resource.install_path
     user new_resource.user
     group new_resource.group
@@ -29,7 +29,7 @@ end
 action_class do
   # @return [String] GitHub API Path constructor.
   def releases_path
-    @releases_path ||= "/repos/#{repo}/releases"
+    @releases_path ||= "/repos/#{new_resource.repo}/releases"
   end
 
   # Retrieves all available GitHub releases for a given repo.

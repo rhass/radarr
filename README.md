@@ -27,7 +27,7 @@ Usage
 -----
 #### radarr::default
 
-It installs Radarr using the official apt repository.
+It installs the mono Radarr from the GitHub releases. Defaults to the latest available version.
 
 Contributing
 ------------

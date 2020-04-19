@@ -2,6 +2,8 @@ default['radarr']['version'] = 'latest'
 default['radarr']['user'] = 'radarr'
 default['radarr']['group'] = 'radarr'
 default['radarr']['home'] = '/home/radarr'
+default['radarr']['createuser'] = true
+
 
 default['mono']['apt']['uri'] = 'https://download.mono-project.com/repo'
 

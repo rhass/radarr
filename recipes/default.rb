@@ -31,7 +31,7 @@ systemd_unit 'radarr.service' do
             User: node['radarr']['user'],
             Group: node['radarr']['user'],
             Type: 'simple',
-            ExecStart: "/usr/bin/mono #{app.install_path}/Radarr.exe -nobrowser",
+            ExecStart: "/usr/bin/mono #{app.install_path}/Radarr.exe -nobrowser -data=#{node['radarr']['home']}",
             TimeoutStopSec: '20',
             KillMode: 'process',
             Restart: 'on-failure',

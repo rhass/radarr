@@ -8,6 +8,7 @@ Attributes
 - `['radarr']['user']` (`String`) - user which radarr will be ran as
 - `['radarr']['group']` (`String`) - group which owns the radarr installation
 - `['radarr']['home']` (`String`) - directory where radarr will place its `.config` directory
+- `['radarr']['createuser']` (`Boolean`) - option to not create user (the above options must be filled in however)
 - `['radarr']['settings']['AnalyticsEnabled']` (`String`) - `'True'`
 - `['radarr']['settings']['ApiKey']` (`String`) - `'changeme'`
 - `['radarr']['settings']['AuthenticationMethod']` (`String`) - `'None'`

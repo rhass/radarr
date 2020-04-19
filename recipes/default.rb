@@ -5,6 +5,7 @@ user node['radarr']['user'] do
   manage_home true
   home node['radarr']['home']
   shell '/usr/sbin/nologin'
+  only_if { node['radarr']['createuser'] }
 end
 
 apt_repository 'mono' do

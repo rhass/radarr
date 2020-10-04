@@ -5,7 +5,7 @@ GITHUB_API_URI = 'https://api.github.com'.freeze
 
 property :version, [String, Symbol], name_property: true
 property :repo, String, default: 'Radarr/Radarr'
-property :install_path, String, default: '/opt/radarr'
+property :install_path, String, default: '/opt/radarr/repo'
 property :user, String, default: lazy { node['radarr']['user'] }
 property :group, String, default: lazy { node['radarr']['user'] }
 

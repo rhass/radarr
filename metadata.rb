@@ -3,7 +3,7 @@ maintainer        'Ryan Hass'
 maintainer_email  'ryan@invalidchecksum.net'
 license           'MIT'
 description       'Installs Radarr.'
-version           '1.0.4'
+version           '1.0.5'
 issues_url        'https://github.com/rhass/radarr/issues'
 source_url        'https://github.com/rhass/radarr'
 

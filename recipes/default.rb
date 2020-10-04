@@ -5,6 +5,7 @@ user node['radarr']['user'] do
   manage_home true
   home node['radarr']['home']
   shell '/usr/sbin/nologin'
+  only_if { node['radarr']['createuser'] }
 end
 
 apt_repository 'mono' do
@@ -30,7 +31,7 @@ systemd_unit 'radarr.service' do
             User: node['radarr']['user'],
             Group: node['radarr']['user'],
             Type: 'simple',
-            ExecStart: "/usr/bin/mono #{app.install_path}/Radarr.exe -nobrowser",
+            ExecStart: "/usr/bin/mono #{app.install_path}/Radarr.exe -nobrowser -data=#{node['radarr']['home']}",
             TimeoutStopSec: '20',
             KillMode: 'process',
             Restart: 'on-failure',

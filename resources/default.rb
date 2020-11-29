@@ -5,7 +5,7 @@ GITHUB_API_URI = 'https://api.github.com'.freeze
 
 property :version, [String, Symbol], name_property: true
 property :repo, String, default: 'Radarr/Radarr'
-property :install_path, String, default: '/opt/radarr/repo'
+property :install_path, String, default: '/opt/radarr'
 property :user, String, default: lazy { node['radarr']['user'] }
 property :group, String, default: lazy { node['radarr']['user'] }
 
@@ -82,9 +82,26 @@ action_class do
     end
   end
 
+  # Helper method to resolve the architecture of the upstream release archive. 
+  # I intentionally do not use the chef-sugar methods pulled into later versions of chef here since they
+  # introduce more complexity and less control. They also result in making very ugly code in comparison.
+  def bin_arch
+    case node['kernel']['machine']
+    when 'x86_64'
+      '-x64'
+    when 'armv6l', 'armv7l', 'armhf'
+      '-arm'
+    when 'aarch64'
+      '-arm64'
+    else
+      # X86 32 bit has no string identifier in the upstream filename
+      '' 
+    end
+  end
+
   # @param version [String] Version identifier.
   # @return [String] URL to download a given release for the the OS detected by Ohai.
   def url_for_version(version)
-    version_info(version)['assets'].select { |asset| asset['name'] =~ /#{node['os']}/ }.first['browser_download_url']
+    version_info(version)['assets'].select { |asset| asset['name'] =~ /#{node['os']}-core#{bin_arch}/ }.first['browser_download_url']
   end
 end

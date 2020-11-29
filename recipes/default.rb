@@ -31,7 +31,7 @@ systemd_unit 'radarr.service' do
             User: node['radarr']['user'],
             Group: node['radarr']['user'],
             Type: 'simple',
-            ExecStart: "/usr/bin/mono #{app.install_path}/Radarr.exe -nobrowser -data=#{node['radarr']['home']}",
+            ExecStart: "#{app.install_path}/Radarr -nobrowser -data=#{node['radarr']['home']}/.config/Radarr",
             TimeoutStopSec: '20',
             KillMode: 'process',
             Restart: 'on-failure',
@@ -41,6 +41,7 @@ systemd_unit 'radarr.service' do
           })
 
   only_if 'which systemctl'
+  verify false # The systemd verify in Chef has always been very buggy.
   action :create
 end
 
